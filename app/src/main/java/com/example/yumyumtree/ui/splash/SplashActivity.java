@@ -1,4 +1,4 @@
-package com.example.yumyumtree.UI.Splash;
+package com.example.yumyumtree.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yumyumtree.R;
-import com.example.yumyumtree.UI.Login.LoginActivity;
+import com.example.yumyumtree.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_SCREEN = 3000;
