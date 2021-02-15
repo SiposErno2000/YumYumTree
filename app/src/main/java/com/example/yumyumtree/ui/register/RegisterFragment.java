@@ -76,7 +76,7 @@ public class RegisterFragment extends Fragment {
 
     private Boolean validateEmail() {
         String value = email.getEditText().getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.|[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
 
         if (value.isEmpty()) {
             Toast.makeText(getActivity(), "Fields cannot be empty!", Toast.LENGTH_SHORT).show();

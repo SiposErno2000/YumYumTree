@@ -1,5 +1,7 @@
 package com.example.yumyumtree.ui.login;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import com.example.yumyumtree.R;
 import com.example.yumyumtree.ui.home.HomeFragment;
 import com.example.yumyumtree.ui.register.RegisterFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -48,9 +52,11 @@ public class LoginFragment extends Fragment {
         View result = inflater.inflate(R.layout.fragment_login, container, false);
         result.findViewById(R.id.signup_button).setOnClickListener(signUpButtonClickListener);
         result.findViewById(R.id.login_button).setOnClickListener(loginButtonClickListener);
+        result.findViewById(R.id.forget_button).setOnClickListener(forgetButtonClickListener);
 
         fullName = result.findViewById(R.id.fullname);
         passwordText = result.findViewById(R.id.password);
+        auth = FirebaseAuth.getInstance();
 
         return result;
     }
@@ -68,8 +74,45 @@ public class LoginFragment extends Fragment {
     private View.OnClickListener loginButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            auth = FirebaseAuth.getInstance();
             loginUserAccount();
+        }
+    };
+
+    private View.OnClickListener forgetButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            EditText resetMail = new EditText(v.getContext());
+            AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+            passwordResetDialog.setTitle("Reset password?");
+            passwordResetDialog.setMessage("Enter your email to received reset link");
+            passwordResetDialog.setView(resetMail);
+
+            passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String mail = resetMail.getText().toString();
+                    auth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getActivity(), "Reset link sent to your email!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getActivity(), "Error! Reset link is not sent!" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+
+            passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            passwordResetDialog.create().show();
         }
     };
 
