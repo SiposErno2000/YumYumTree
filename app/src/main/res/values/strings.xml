@@ -19,4 +19,7 @@
     <string name="register_text">Register</string>
     <string name="backToLogin_text">Already have an account? Login</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
