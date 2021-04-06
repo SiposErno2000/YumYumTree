@@ -2,10 +2,11 @@ package com.example.yumyumtree.ui.register;
 
 public class UserHelper {
 
-    String fullName, username, email, phoneNo, password;
-
-    public UserHelper() {
-    }
+    private String fullName;
+    private String username;
+    private String email;
+    private String phoneNo;
+    private String password;
 
     public UserHelper(String fullName, String username, String email, String phoneNo, String password) {
         this.fullName = fullName;

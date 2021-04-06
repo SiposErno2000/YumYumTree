@@ -1,12 +1,10 @@
 package com.example.yumyumtree.ui.home;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedDispatcherOwner;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,44 +17,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.yumyumtree.R;
-import com.example.yumyumtree.data.api.Api;
-import com.example.yumyumtree.data.api.RetrofitClient;
+import com.example.yumyumtree.data.api.RestaurantsCache;
+import com.example.yumyumtree.data.api.UserProfileHandler;
 import com.example.yumyumtree.ui.favourites.FavouritesFragment;
 import com.example.yumyumtree.ui.login.LoginFragment;
 import com.example.yumyumtree.ui.profile.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.annotations.NotNull;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -124,41 +101,23 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
                 }
             }
         });
+
+        UserProfileHandler userProfileHandler = UserProfileHandler.getInstance();
+        userProfileHandler.getUserData();
     }
 
     private void getRestaurants() {
+        RestaurantsCache restaurantsCache = RestaurantsCache.getInstance();
         restaurantList = new ArrayList<>();
-        Call<RestaurantResponse> call = RetrofitClient.getInstance().getMyApi().getRestaurants();
-        call.enqueue(new Callback<RestaurantResponse>() {
-            @Override
-            public void onResponse(@Nullable Call<RestaurantResponse> call, @Nullable Response<RestaurantResponse> response) {
-                if (response != null && response.isSuccessful()) {
-                    RestaurantResponse restaurantResponse = response.body();
-                    List<Restaurant> restList = restaurantResponse.getRestaurants();
-
-                    for (int i = 0; i < restList.size(); i++) {
-                        String name = restList.get(i).getName();
-                        int id = restList.get(i).getId();
-                        String city = restList.get(i).getCity();
-                        String address = restList.get(i).getAddress();
-                        String area = restList.get(i).getArea();
-                        String phone = restList.get(i).getPhone();
-                        String image_url = restList.get(i).getImage_url();
-
-                        restaurantList.add(new Restaurant(id, name, address, city, area, phone, image_url));
-                    }
-                    createUIElements();
-                }
-            }
-
-            @Override
-            public void onFailure(@Nullable Call<RestaurantResponse> call, @NonNull Throwable t) {
-                createUIElements();
-                searchView.clearFocus();
-                searchView.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "No data to load!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (restaurantsCache.getRestaurantList() != null) {
+            restaurantList = restaurantsCache.getRestaurantList();
+            createUIElements();
+        } else {
+            createUIElements();
+            searchView.clearFocus();
+            searchView.setVisibility(View.GONE);
+            Toast.makeText(getActivity(), "No data to load!", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

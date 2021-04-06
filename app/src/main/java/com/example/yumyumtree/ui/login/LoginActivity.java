@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.yumyumtree.R;
 import com.example.yumyumtree.ui.favourites.FavouritesFragment;

@@ -15,7 +15,7 @@ import com.example.yumyumtree.R;
 import com.example.yumyumtree.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 3000;
+    private static final int SPLASH_SCREEN = 3000;
 
     Animation topAnimation, bottomAnimation;
     ImageView logo;
@@ -38,13 +38,10 @@ public class SplashActivity extends AppCompatActivity {
         rest_name.setAnimation(bottomAnimation);
         slogan.setAnimation(bottomAnimation);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         },SPLASH_SCREEN);
     }
 }
