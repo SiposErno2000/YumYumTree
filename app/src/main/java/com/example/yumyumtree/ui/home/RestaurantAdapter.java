@@ -2,32 +2,23 @@ package com.example.yumyumtree.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.yumyumtree.R;
 import com.example.yumyumtree.ui.detail.DetailFragment;
-import com.example.yumyumtree.ui.profile.ProfileFragment;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static com.example.yumyumtree.ui.detail.DetailFragment.EXTRA_ID;
@@ -37,7 +28,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     private final List<Restaurant> restaurantListAll;
     private final Context context;
     private List<Restaurant> restaurantList;
-
 
     public RestaurantAdapter(List<Restaurant> restaurantList, Context context) {
         this.restaurantList = restaurantList;

@@ -49,12 +49,13 @@
         android:layout_marginTop="@dimen/margin_medium"
         app:layout_constraintTop_toBottomOf="@id/sign_in"
         android:id="@+id/fullname"
-        android:hint="Full Name" >
+        android:hint="Full Name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:text="Sipos"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,7 +73,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:text="sipi2000#"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
