@@ -5,6 +5,7 @@
     <dimen name="medium_size">150dp</dimen>
     <dimen name="small_size">120dp</dimen>
     <dimen name="extra_small_size">60dp</dimen>
+    <dimen name="very_small_size">25dp</dimen>
     <dimen name="null_size">0dp</dimen>
 
     <dimen name="margin_null">0dp</dimen>
