@@ -12,6 +12,7 @@
     <string name="login_signin">Sign In to continue</string>
     <string name="fotget_button_text">FORGET PASSWORD?</string>
     <string name="login_button_text">LOGIN</string>
+    <string name="logout_button_text">LOGOUT</string>
     <string name="register_button_text">NEW USER? SIGN UP</string>
 
     <string name="register_welcome">Welcome!</string>
@@ -21,5 +22,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="change_password">Change Password</string>
 
 </resources>
