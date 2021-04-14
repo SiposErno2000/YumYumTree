@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:background="#227db5"
+    android:gravity="bottom"
+    android:padding="@dimen/margin_medium">
+
+    <ImageView
+        android:layout_width="@dimen/big_margin"
+        android:layout_height="@dimen/big_margin"
+        android:src="@drawable/food" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splash_rest_name"
+        android:textSize="@dimen/small_text_size" />
+
+</LinearLayout>

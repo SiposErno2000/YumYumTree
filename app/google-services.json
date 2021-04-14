@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "167772685698",
+    "project_id": "yum-yum-tree",
+    "storage_bucket": "yum-yum-tree.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167772685698:android:c322848428f7de13cbbb9b",
+        "android_client_info": {
+          "package_name": "com.example.yumyumtree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167772685698-hiq57ecc1d38liv1f5pjjdo151od1rto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeYkVLAQmA-Ckkmq00afVV4JNHLDXJf60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167772685698-hiq57ecc1d38liv1f5pjjdo151od1rto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
