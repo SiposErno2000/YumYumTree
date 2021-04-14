@@ -7,7 +7,8 @@
     android:id="@+id/drawer_layout"
     tools:context=".ui.home.HomeFragment"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:background="#227db5">
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

@@ -1,15 +1,17 @@
 package com.example.yumyumtree.ui.detail;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,13 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
+import static com.example.yumyumtree.R.drawable.favorite;
 import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
 
 public class DetailFragment extends Fragment {
 
     public final static String EXTRA_ID = "id";
-    private UserProfileHandler userProfileHandler;
+    private final UserProfileHandler userProfileHandler = UserProfileHandler.getInstance();;
     private View view;
     private String name;
     private String id;
@@ -49,11 +52,11 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_detail, container, false);
-        userProfileHandler = UserProfileHandler.getInstance();
         createUIElements();
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     private void createUIElements() {
         TextView restId, restArea, restCity, restAddress, restPhone, restName;
         ImageView restImage;
@@ -74,7 +77,7 @@ public class DetailFragment extends Fragment {
         if (bundle != null) {
             id = bundle.getString(EXTRA_ID);
             if (favouriteCheck(id)) {
-                view.findViewById(R.id.favButton).setBackgroundColor(Color.parseColor("#FF039BE5"));
+                view.findViewById(R.id.favButton).setBackground(ContextCompat.getDrawable(getContext(), favorite));
             }
             Restaurant restaurant = restaurantsCache.getRestaurant(id);
             name = restaurant.getName();
@@ -108,10 +111,10 @@ public class DetailFragment extends Fragment {
             rootRef = FirebaseDatabase.getInstance().getReference("users");
             rootRef.child(CURRENT_NAME).child(CHILD).child(id).removeValue();
         } else {
-            userProfileHandler.getFavouriteList().add(id);
+            userProfileHandler.addItemtoList(id);
             rootRef = FirebaseDatabase.getInstance().getReference("users");
             rootRef.child(CURRENT_NAME).child(CHILD).child(id).setValue(id);
-            view.findViewById(R.id.favButton).setBackgroundColor(Color.parseColor("#FF039BE5"));
+            view.findViewById(R.id.favButton).setBackground(ContextCompat.getDrawable(getContext(), favorite));
         }
     };
 

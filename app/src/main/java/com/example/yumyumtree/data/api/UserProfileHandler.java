@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
 
@@ -90,11 +91,19 @@ public class UserProfileHandler {
     }
 
     public void removeItemFromList(String item) {
-        for (int i=0; i<favouriteList.size(); i++) {
-            if (favouriteList.get(i).equals(item)) {
-                favouriteList.remove(i);
+        Iterator<String> iterator = favouriteList.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.equals(item)) {
+                iterator.remove();
                 break;
+            } else {
+                iterator.next();
             }
         }
+    }
+
+    public void addItemtoList(String item) {
+        favouriteList.add(item);
+        setFavouriteList(favouriteList);
     }
 }
