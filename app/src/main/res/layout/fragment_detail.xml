@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.detail.DetailFragment">
+    tools:context=".ui.detail.DetailFragment"
+    android:background="#227db5">
 
     <ImageView
         android:id="@+id/restImage"
@@ -120,7 +121,7 @@
         android:gravity="center_horizontal"
         android:text="@string/splash_slogan"
         android:textAlignment="center"
-        android:textSize="@dimen/very_small_text_size"
+        android:textSize="@dimen/small_text_size"
         android:textStyle="italic"
         android:fontFamily="casual"
         android:layout_width="wrap_content"
@@ -135,7 +136,7 @@
 
     <Button
         android:id="@+id/favButton"
-        android:background="@drawable/favorite"
+        android:background="@drawable/favorite2"
         android:layout_width="@dimen/small_size_detail"
         android:layout_height="@dimen/small_size_detail"
         android:layout_marginTop="@dimen/big_size_detail"

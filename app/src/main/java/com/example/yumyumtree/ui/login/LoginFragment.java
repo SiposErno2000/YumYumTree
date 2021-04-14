@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,6 @@ public class LoginFragment extends Fragment {
         fullName = result.findViewById(R.id.fullname);
         passwordText = result.findViewById(R.id.password);
         auth = FirebaseAuth.getInstance();
-
-        RestaurantsCache restaurantsCache = RestaurantsCache.getInstance();
-        restaurantsCache.getRestaurants();
 
         return result;
     }
