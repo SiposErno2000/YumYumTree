@@ -23,6 +23,7 @@ public class UserProfileHandler {
     private static UserProfileHandler userProfileHandler;
     private UserHelper userHelper;
     private ArrayList<String> favouriteList;
+    private String imageUrl;
 
     private UserProfileHandler() {}
 
@@ -47,6 +48,10 @@ public class UserProfileHandler {
 
     public void setFavouriteList(ArrayList<String> favouriteList) {
         this.favouriteList = favouriteList;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public void getUserData() {
@@ -81,6 +86,21 @@ public class UserProfileHandler {
                     favouriteList.add(id);
                 }
                 setFavouriteList(favouriteList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG, "Unsuccessful data request!");
+            }
+        });
+
+        reference = root.getReference("users").child(CURRENT_NAME).child("profileImage");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds: snapshot.getChildren()) {
+                    imageUrl = ds.getValue().toString();
+                }
             }
 
             @Override

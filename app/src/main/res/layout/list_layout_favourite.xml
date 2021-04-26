@@ -45,45 +45,51 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/margin_extra_small">
 
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Id:" />
+                    <TableRow
+                        android:layout_marginTop="@dimen/margin_extra_small">
+                        <ImageView
+                            android:layout_width="@dimen/size"
+                            android:layout_height="@dimen/size"
+                            android:src="@drawable/id" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/restaurantIdFav"
-                            android:text="RestId"
+                            android:text=""
+                            android:textStyle="italic"
                             android:layout_marginLeft="@dimen/margin_small"/>
                     </TableRow>
 
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Area:"/>
+                    <TableRow
+                        android:layout_marginTop="@dimen/margin_extra_small">
+                        <ImageView
+                            android:layout_width="@dimen/size"
+                            android:layout_height="@dimen/size"
+                            android:src="@drawable/area" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/restaurantAreaFav"
-                            android:text="RestArea"
+                            android:text=""
+                            android:textStyle="italic"
                             android:layout_marginLeft="@dimen/margin_small" />
                     </TableRow>
 
-                    <TableRow>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="City:"/>
+                    <TableRow
+                        android:layout_marginTop="@dimen/margin_extra_small">
+                        <ImageView
+                            android:layout_width="@dimen/size"
+                            android:layout_height="@dimen/size"
+                            android:src="@drawable/city" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/restaurantCityFav"
-                            android:text="RestCity"
+                            android:text=""
+                            android:textStyle="italic"
                             android:layout_marginLeft="@dimen/margin_small" />
                     </TableRow>
 

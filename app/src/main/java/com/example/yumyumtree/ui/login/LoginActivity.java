@@ -9,6 +9,7 @@ import com.example.yumyumtree.R;
 import com.example.yumyumtree.ui.favourites.FavouritesFragment;
 import com.example.yumyumtree.ui.home.HomeFragment;
 import com.example.yumyumtree.ui.profile.ProfileFragment;
+import com.example.yumyumtree.ui.register.RegisterFragment;
 
 import java.util.List;
 
@@ -45,6 +46,18 @@ public class LoginActivity extends AppCompatActivity {
             }
             else if (f instanceof FavouritesFragment) {
                 handled = ((FavouritesFragment)f).onBackPressed();
+                if (handled) {
+                    break;
+                }
+            }
+            else if (f instanceof RegisterFragment) {
+                handled = ((RegisterFragment)f).onBackPressed();
+                if (handled) {
+                    break;
+                }
+            }
+            else if (f instanceof LoginFragment) {
+                handled = ((LoginFragment)f).onBackPressed();
                 if (handled) {
                     break;
                 }

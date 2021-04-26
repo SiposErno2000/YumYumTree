@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment"
-    android:id="@+id/loginfragment" >
+    android:id="@+id/loginfragment"
+    android:background="#227db5">
 
     <ImageView
         android:id="@+id/logoImage"

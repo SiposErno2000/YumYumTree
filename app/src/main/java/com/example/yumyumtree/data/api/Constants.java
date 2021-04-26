@@ -4,7 +4,6 @@ public class Constants {
 
     private static Constants constants;
     private boolean dataLoading;
-    private boolean animation;
 
     private Constants() {
     }
@@ -22,13 +21,5 @@ public class Constants {
 
     public void setDataLoading(boolean dataLoading) {
         this.dataLoading = dataLoading;
-    }
-
-    public boolean getAnimation() {
-        return animation;
-    }
-
-    public void setAnimation(boolean animation) {
-        this.animation = animation;
     }
 }

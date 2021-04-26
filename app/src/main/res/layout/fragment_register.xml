@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterFragment"
-    android:id="@+id/registerfragment" >
+    android:id="@+id/registerfragment"
+    android:background="#227db5">
 
     <ImageView
         android:id="@+id/logoImage"
