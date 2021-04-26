@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,14 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-import static com.example.yumyumtree.R.drawable.favorite;
+import static com.example.yumyumtree.R.drawable.redheart;
 import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
 
 public class DetailFragment extends Fragment {
 
     public final static String EXTRA_ID = "id";
-    private final UserProfileHandler userProfileHandler = UserProfileHandler.getInstance();;
+    private final UserProfileHandler userProfileHandler = UserProfileHandler.getInstance();
     private View view;
     private String name;
     private String id;
@@ -42,6 +40,7 @@ public class DetailFragment extends Fragment {
     private String image_url;
     private String address;
     private String reserve_url;
+    private ImageView favouriteImage;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -70,14 +69,15 @@ public class DetailFragment extends Fragment {
         restCity = view.findViewById(R.id.restCity);
         restPhone = view.findViewById(R.id.restPhone);
         restImage = view.findViewById(R.id.restImage);
+        favouriteImage = view.findViewById(R.id.favImage);
         view.findViewById(R.id.readMoreButton).setOnClickListener(readMoreButtonClickListener);
-        view.findViewById(R.id.favButton).setOnClickListener(favButtonClickListener);
+        view.findViewById(R.id.favImage).setOnClickListener(favButtonClickListener);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             id = bundle.getString(EXTRA_ID);
             if (favouriteCheck(id)) {
-                view.findViewById(R.id.favButton).setBackground(ContextCompat.getDrawable(getContext(), favorite));
+                Glide.with(getContext()).load(redheart).into(favouriteImage);
             }
             Restaurant restaurant = restaurantsCache.getRestaurant(id);
             name = restaurant.getName();
@@ -114,7 +114,7 @@ public class DetailFragment extends Fragment {
             userProfileHandler.addItemtoList(id);
             rootRef = FirebaseDatabase.getInstance().getReference("users");
             rootRef.child(CURRENT_NAME).child(CHILD).child(id).setValue(id);
-            view.findViewById(R.id.favButton).setBackground(ContextCompat.getDrawable(getContext(), favorite));
+            Glide.with(getContext()).load(redheart).into(favouriteImage);
         }
     };
 

@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.yumyumtree.R;
-import com.example.yumyumtree.data.api.RestaurantsCache;
 import com.example.yumyumtree.ui.home.HomeFragment;
 import com.example.yumyumtree.ui.register.RegisterFragment;
 import com.google.android.material.textfield.TextInputLayout;
@@ -30,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginFragment extends Fragment {
 
+    private final static String TAG = LoginFragment.class.getSimpleName();
     public static String CURRENT_NAME;
     private FirebaseAuth auth;
     private TextInputLayout fullName, passwordText;
@@ -128,8 +128,20 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d(TAG, "Unsuccessful data request!");
             }
         });
+    }
+
+
+    public boolean onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+        builder.setMessage(R.string.alert_message_home);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.positive_alert_button_home, (dialog, which) -> System.exit(0));
+        builder.setNegativeButton(R.string.negative_alert_button_home, (dialog, which) -> dialog.cancel());
+        androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        return true;
     }
 }

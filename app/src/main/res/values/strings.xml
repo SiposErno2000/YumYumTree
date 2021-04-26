@@ -14,6 +14,7 @@
     <string name="login_button_text">LOGIN</string>
     <string name="logout_button_text">LOGOUT</string>
     <string name="register_button_text">NEW USER? SIGN UP</string>
+    <string name="upluad_button">Upload</string>
 
     <string name="register_welcome">Welcome!</string>
     <string name="register_slogan">SignUp to start a new Journey</string>
@@ -24,5 +25,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="change_password">Change Password</string>
+
+<!--    MESSAGES-->
+    <string name="alert_message">Enter a new password!</string>
+    <string name="positive_alert_button">Ok</string>
+    <string name="negative_alert_button">Cancel</string>
+
+    <string name="alert_message_home">Are you sure you want to exit?</string>
+    <string name="positive_alert_button_home">Exit</string>
+    <string name="negative_alert_button_home">Cancel</string>
+    <string name="imageUrlFromFirebase">imageUrl</string>
+
 
 </resources>

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,9 +37,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
-    public final static String POSITIVE_BUTTON_TEXT = "Exit";
-    public final static String NEGATIVE_BUTTON_TEXT = "No";
-    public final static String ALERT_MESSAGE = "Are you sure you want to exit?";
     private List<Restaurant> restaurantList;
     private RestaurantAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -127,10 +123,10 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setMessage(ALERT_MESSAGE);
+            builder.setMessage(R.string.alert_message_home);
             builder.setCancelable(true);
-            builder.setPositiveButton(POSITIVE_BUTTON_TEXT, (dialog, which) -> System.exit(0));
-            builder.setNegativeButton(NEGATIVE_BUTTON_TEXT, (dialog, which) -> dialog.cancel());
+            builder.setPositiveButton(R.string.positive_alert_button_home, (dialog, which) -> System.exit(0));
+            builder.setNegativeButton(R.string.negative_alert_button_home, (dialog, which) -> dialog.cancel());
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }

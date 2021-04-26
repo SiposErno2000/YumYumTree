@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+
 public class RegisterFragment extends Fragment {
 
-    private TextInputLayout fullName, username, email, phoneNo, password;
+    private TextInputLayout fullName;
+    private TextInputLayout username;
+    private TextInputLayout email;
+    private TextInputLayout phoneNo;
+    private TextInputLayout password;
     private List<String> users;
 
     public RegisterFragment() {
@@ -58,16 +65,13 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            UserHelper userHelper = dataSnapshot.getValue(UserHelper.class);
-                            if (userHelper != null) {
-                                users.add(userHelper.getFullName());
-                            }
+                            users.add(dataSnapshot.getKey());
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Toast.makeText(getActivity(), "No data to load!", Toast.LENGTH_SHORT).show();
                     }
                 });
         return users;
@@ -175,7 +179,7 @@ public class RegisterFragment extends Fragment {
             String pass = password.getEditText().getText().toString();
 
             UserHelper userHelper = new UserHelper(name, user, mail, phone, pass);
-
+            CURRENT_NAME = name;
             reference.child(name).setValue(userHelper);
 
             HomeFragment homeFragment = new HomeFragment();
@@ -187,8 +191,18 @@ public class RegisterFragment extends Fragment {
 
     private final View.OnClickListener backToLoginClickListener = v -> {
         LoginFragment loginFragment = new LoginFragment();
+        loadFragments(loginFragment);
+    };
+
+    public boolean onBackPressed() {
+        LoginFragment loginFragment = new LoginFragment();
+        loadFragments(loginFragment);
+        return true;
+    }
+
+    public void loadFragments(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.popBackStackImmediate();
-        fragmentManager.beginTransaction().addToBackStack(null).add(R.id.loginactivity, loginFragment).commit();
-    };
+        fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.loginactivity, fragment).commit();
+    }
 }

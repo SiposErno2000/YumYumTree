@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,10 +17,6 @@ import com.example.yumyumtree.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    Animation topAnimation, bottomAnimation;
-    ImageView logo;
-    TextView rest_name, slogan;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +25,12 @@ public class SplashActivity extends AppCompatActivity {
 
         Constants constants = Constants.getInstance();
 
-        topAnimation = AnimationUtils.loadAnimation(this,R.anim.top_animation);
-        bottomAnimation = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        Animation topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        Animation bottomAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-        logo = findViewById(R.id.logo);
-        rest_name = findViewById(R.id.rest_name);
-        slogan = findViewById(R.id.slogan);
+        ImageView logo = findViewById(R.id.logo);
+        TextView rest_name = findViewById(R.id.rest_name);
+        TextView slogan = findViewById(R.id.slogan);
 
         logo.setAnimation(topAnimation);
         rest_name.setAnimation(bottomAnimation);

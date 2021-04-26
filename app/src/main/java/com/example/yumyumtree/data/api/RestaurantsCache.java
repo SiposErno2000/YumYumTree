@@ -1,18 +1,12 @@
 package com.example.yumyumtree.data.api;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.yumyumtree.ui.home.Restaurant;
 import com.example.yumyumtree.ui.home.RestaurantResponse;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +14,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
-import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
 
 public class RestaurantsCache {
 
