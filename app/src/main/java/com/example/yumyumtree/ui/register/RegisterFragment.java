@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+import static com.example.yumyumtree.ui.login.LoginFragment.USERS;
 
 public class RegisterFragment extends Fragment {
 
@@ -60,7 +61,7 @@ public class RegisterFragment extends Fragment {
 
     private List<String> existingUsers() {
         List<String> users = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference().child("users")
+        FirebaseDatabase.getInstance().getReference().child(USERS)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -170,7 +171,7 @@ public class RegisterFragment extends Fragment {
                 return;
             }
             FirebaseDatabase root = FirebaseDatabase.getInstance();
-            DatabaseReference reference = root.getReference("users");
+            DatabaseReference reference = root.getReference(USERS);
 
             String name = fullName.getEditText().getText().toString();
             String user = username.getEditText().getText().toString();

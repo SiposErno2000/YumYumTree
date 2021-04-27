@@ -13,10 +13,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,17 +33,24 @@ import com.example.yumyumtree.ui.favourites.FavouritesFragment;
 import com.example.yumyumtree.ui.login.LoginFragment;
 import com.example.yumyumtree.ui.profile.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
+import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+
 public class HomeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final UserProfileHandler userProfileHandler = UserProfileHandler.getInstance();
     private List<Restaurant> restaurantList;
     private RestaurantAdapter adapter;
     private DrawerLayout drawerLayout;
     private SearchView searchView;
     private View view;
+    private DatabaseReference rootRef;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -75,6 +84,22 @@ public class HomeFragment extends Fragment implements NavigationView.OnNavigatio
 
         adapter = new RestaurantAdapter(restaurantList, getContext());
         recyclerView.setAdapter(adapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                final Restaurant restaurant = restaurantList.get(viewHolder.getAdapterPosition());
+                String id = String.valueOf(restaurant.getId());
+                userProfileHandler.addItemtoList(id);
+                rootRef = FirebaseDatabase.getInstance().getReference("users");
+                rootRef.child(CURRENT_NAME).child(CHILD).child(id).setValue(id);
+            }
+        }).attachToRecyclerView(recyclerView);
 
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

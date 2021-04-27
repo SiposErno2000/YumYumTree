@@ -26,6 +26,7 @@ import java.util.Objects;
 import static com.example.yumyumtree.R.drawable.redheart;
 import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+import static com.example.yumyumtree.ui.login.LoginFragment.USERS;
 
 public class DetailFragment extends Fragment {
 
@@ -108,11 +109,11 @@ public class DetailFragment extends Fragment {
         DatabaseReference rootRef;
         if (favouriteCheck(id)) {
             userProfileHandler.removeItemFromList(id);
-            rootRef = FirebaseDatabase.getInstance().getReference("users");
+            rootRef = FirebaseDatabase.getInstance().getReference(USERS);
             rootRef.child(CURRENT_NAME).child(CHILD).child(id).removeValue();
         } else {
             userProfileHandler.addItemtoList(id);
-            rootRef = FirebaseDatabase.getInstance().getReference("users");
+            rootRef = FirebaseDatabase.getInstance().getReference(USERS);
             rootRef.child(CURRENT_NAME).child(CHILD).child(id).setValue(id);
             Glide.with(getContext()).load(redheart).into(favouriteImage);
         }

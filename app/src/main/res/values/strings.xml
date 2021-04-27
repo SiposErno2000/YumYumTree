@@ -35,6 +35,7 @@
     <string name="positive_alert_button_home">Exit</string>
     <string name="negative_alert_button_home">Cancel</string>
     <string name="imageUrlFromFirebase">imageUrl</string>
+    <string name="users">users</string>
 
 
 </resources>

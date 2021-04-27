@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+import static com.example.yumyumtree.ui.login.LoginFragment.USERS;
 
 public class UserProfileHandler {
 
@@ -56,7 +57,7 @@ public class UserProfileHandler {
 
     public void getUserData() {
         FirebaseDatabase root = FirebaseDatabase.getInstance();
-        DatabaseReference reference = root.getReference("users").child(CURRENT_NAME);
+        DatabaseReference reference = root.getReference(USERS).child(CURRENT_NAME);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -77,7 +78,7 @@ public class UserProfileHandler {
         });
 
         ArrayList<String> favouriteList = new ArrayList<>();
-        reference = root.getReference("users").child(CURRENT_NAME).child(CHILD);
+        reference = root.getReference(USERS).child(CURRENT_NAME).child(CHILD);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,7 +95,7 @@ public class UserProfileHandler {
             }
         });
 
-        reference = root.getReference("users").child(CURRENT_NAME).child("profileImage");
+        reference = root.getReference(USERS).child(CURRENT_NAME).child("profileImage");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

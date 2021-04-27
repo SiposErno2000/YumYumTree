@@ -2,11 +2,14 @@ package com.example.yumyumtree.ui.favourites;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +20,20 @@ import com.example.yumyumtree.data.api.RestaurantsCache;
 import com.example.yumyumtree.data.api.UserProfileHandler;
 import com.example.yumyumtree.ui.home.HomeFragment;
 import com.example.yumyumtree.ui.home.Restaurant;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.yumyumtree.data.api.UserProfileHandler.CHILD;
+import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+import static com.example.yumyumtree.ui.login.LoginFragment.USERS;
+
 public class FavouritesFragment extends Fragment {
 
+    private DatabaseReference rootRef;
     private View view;
     private List<Restaurant> favouriteList;
 
@@ -46,6 +57,34 @@ public class FavouritesFragment extends Fragment {
 
         FavouriteAdapter favouriteAdapter = new FavouriteAdapter(getContext(), favouriteList);
         recyclerView.setAdapter(favouriteAdapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Restaurant deleteRestaurant = favouriteList.get(viewHolder.getAdapterPosition());
+                int position = viewHolder.getAdapterPosition();
+                String id = String.valueOf(deleteRestaurant.getId());
+                favouriteList.remove(viewHolder.getAdapterPosition());
+                favouriteAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                rootRef = FirebaseDatabase.getInstance().getReference(USERS);
+                rootRef.child(CURRENT_NAME).child(CHILD).child(id).removeValue();
+
+                Snackbar.make(recyclerView, deleteRestaurant.getName(), Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        favouriteList.add(position, deleteRestaurant);
+                        favouriteAdapter.notifyItemInserted(position);
+                        rootRef = FirebaseDatabase.getInstance().getReference(USERS);
+                        rootRef.child(CURRENT_NAME).child(CHILD).child(id).setValue(id);
+                    }
+                }).show();
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     private void getFavouriteRestaurants() {

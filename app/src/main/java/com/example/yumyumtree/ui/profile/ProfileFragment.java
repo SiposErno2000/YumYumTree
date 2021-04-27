@@ -40,6 +40,7 @@ import com.google.firebase.storage.UploadTask;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.yumyumtree.ui.login.LoginFragment.CURRENT_NAME;
+import static com.example.yumyumtree.ui.login.LoginFragment.USERS;
 
 
 public class ProfileFragment extends Fragment {
@@ -49,7 +50,7 @@ public class ProfileFragment extends Fragment {
     private EditText editText;
     private ImageView profilePicture;
     private ProgressBar progressBar;
-    private final DatabaseReference root = FirebaseDatabase.getInstance().getReference("users").child(CURRENT_NAME);
+    private final DatabaseReference root = FirebaseDatabase.getInstance().getReference(USERS).child(CURRENT_NAME);
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
     private Uri imageUri;
 

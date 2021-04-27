@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginFragment extends Fragment {
 
     private final static String TAG = LoginFragment.class.getSimpleName();
+    public final static String USERS = "users";
     public static String CURRENT_NAME;
     private FirebaseAuth auth;
     private TextInputLayout fullName, passwordText;
@@ -104,7 +105,7 @@ public class LoginFragment extends Fragment {
         }
 
         FirebaseDatabase root = FirebaseDatabase.getInstance();
-        DatabaseReference reference = root.getReference("users").child(name);
+        DatabaseReference reference = root.getReference(USERS).child(name);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
